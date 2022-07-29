@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Catch=Out!</title>
+    <link href="{{ url_for('static', filename='main.css') }}" rel="stylesheet" type="text/css">
+    <link rel="icon" href="{{ url_for('static', filename='favicon-16x16.png') }}">
+</head>
+<body>
+  <!--
+  <div class="navbar">
+      <h1 class="navbar-content">Catch=Out!</h1>
+  </div>
+  -->
+  <video autoplay muted loop id="myVideo">
+  <source src="{{ url_for('static', filename='Tree - 71862.mp4') }}" type="video/mp4">
+  Your browser does not support HTML5 video.
+</video>
+<div class="overlay">
+
+</div>
+  <div class="image">
+      <img src="{{ url_for('static', filename='Catch-Out--unscreen.gif') }}" alt="bear animation">
+    </div>
+
+
+
+      <div class="mywork"><form method="POST" action="{{url_for('home')}}">
+        <br>
+        <br>
+        <label for="directory"><h2>Choose Directory</h2></label><br>
+        <select id="directory" name="directory" onchange="myFunction(this.value)">
+        <option value="1">GitHub</option>
+        <option value="1">NPM</option>
+        <option value="3">PyPi</option>
+        <option value="4">Other</option>
+        </select>
+        <br>
+        <br>
+
+        <p><input id="textit" type="text" name="link" placeholder="Enter Link"/></p>
+        <br><br>
+        <p><input type="submit" name="submit"></p></input>
+        <br>
+    </form>
+</div>
+<script>
+  function myFunction(e){
+    if(e=='1')
+    document.getElementById("textit").placeholder="Enter git Link For the Package";
+    else if(e=='3')
+    document.getElementById("textit").placeholder="Enter name of the python package";
+    else if(e=='4')
+    document.getElementById("textit").placeholder="Enter link of zipfile";
+
+  }
+</script>
+    </body>
+    
+    </html>

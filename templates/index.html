@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Report Catch=Out!</title>
+        <!-- Favicon-->
+        <link rel="icon" href="{{ url_for('static', filename='favicon-16x16.png') }}" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{{url_for( 'static', filename='styles.css')}}" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <!-- Responsive navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container px-5">
+                <a class="navbar-brand" href="#!"><h1>Catch=Out!</h1></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!"><h2>Detailed Report</h2></a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Page Content-->
+        <div class="container px-4 px-lg-5">
+            <!-- Heading Row-->
+            <div class="row gx-4 gx-lg-5 align-items-center my-5">
+                <div class="col-md-4">
+                    <h1 class="chart-heading">Code Vulnerability Analysis</h1>
+                    <main>
+                    <div id="chart1"></div>
+                    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+                    <script type="text/javascript">
+                    var graph1 = {{graph1JSON | safe}};
+                    Plotly.plot("chart1",graph1,{});
+                    </script>
+                    </main></div>
+                    <div class="col-md-4 align-items-right">
+                    <h2 class="font-weight-light">The Code Is : </h2><h1 style="color:Orange;"> {{usability}} </h1><br>
+                    <h2 class="font-weight-light">Safety Rating : </h2><h1 style="color:Orange;"> {{star}} /5</h1>
+                    <p style="color:red;">Note: {{vulner}}</p>
+                    <a class="btn btn-primary" href="{{ url_for('report')}}">Download Report</a>
+                    <a class="btn btn-primary" href="{{ url_for('download_file')}}">File</a>
+                </div>
+                <div class="col-md-4">
+                    <main>
+                        <h1 class="chart-heading">Code Dependency Health</h1>
+                    <div id="chart3"></div>
+                    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+                    <script type="text/javascript">
+                    var graph3 = {{graph3JSON | safe}};
+                    Plotly.plot("chart3",graph3,{});
+                    </script>
+                </main></div>
+            </div>
+            <hr>
+            <div class="row gx-4 gx-lg-5 align-items-center my-5">
+                <div class="col-lg-5">
+                    <h1 class="font-weight-light" style="color:green;">Language Composition of the repository</h1>
+                    <p>The Languages used by the reposityory are very esssential in determining the type of changes required to make the
+                        code usable . The Primary languages used in the code is displayed in the graph.
+                    </p>
+                </div>
+                <div class="col-lg-7">
+                    <main>
+                    <h1 class="chart-heading">File Wise Distribution</h1>
+                    <div id="chart2"></div>
+                    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+                    <script type="text/javascript">
+                    var graph2 = {{graph2JSON | safe}};
+                    Plotly.plot("chart2",graph2,{});
+                    </script>
+                    </main></div>
+            </div>
+            <!-- Call to Action-->
+            <hr>
+            <div class="card text-white bg-secondary my-5 py-4 text-center">
+                <H1>Table for Critical Vulnerability</H1>
+                <div class="card-body"><p class="text-white m-0"><html>{{ code | safe }}</html></p></div>
+            </div>
+            <!-- Content Row-->
+            <hr>
+            <div class="row gx-4 gx-lg-5">
+                <div class="col-md-12 mb-5">
+                    <div class="card h-100">
+                        <div class="card-body flex-column">
+                            <h2 class="card-title">Dependency Vulnerability (NVD DATABASE)</h2>
+                            <div class="card-text">All the files of the repository are examined for their dependencies and then all the dependencies of the files are examined though the NVD database for vulnerability issues.
+                                Find the two most useful plots of the dependecies which are at high risk and the issue count in each dependency for rectification. 
+                                <br>
+                                <div class="col-md-12 align-items-center">
+                                    <h2 class="font-weight-light">Individual Dependency Vulnerabilities</h2><h1 style="color:Orange;"> Remove/Substitute High Risk Dependencies </h1>
+                                </div><main>
+                                    <div id="chart44"></div>
+                                    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+                                    <script type="text/javascript">
+                                    var graph44 = {{graph11JSON | safe}};
+                                    Plotly.plot("chart44",graph44,{});
+                                    </script>
+                                </main>
+                                <div class="column">
+                                    <h2 class="font-weight-light">The Dependencies have :</h2> <h1 style="color:Orange;"> {{nvdlist}} </h1><h2 class="font-weight-light">Vulnerabilities</h2>
+                                    <p style="color:red; size:10;">Note: Overall Report Consists of Vulnerabilities in all the libraries of the repository examined.</p>
+                                </div>
+                                <div class="column2">
+                                <main>
+                                    <div id="chart55">
+                                    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+                                    <script type="text/javascript">
+                                    var graph55 = {{graph12JSON | safe}};
+                                    Plotly.plot("chart55",graph55,{});
+                                    </script>
+                                    </div>
+                                </main>
+                            </div>
+                            </p>
+                        </div>
+                        <div class="card-footer"><a class="btn btn-primary btn-sm" href="{{ url_for('download_dependency')}}">Download Dependency Report</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container px-4 px-lg-5"><p class="m-0 text-center text-white">Copyright &copy; Catch=Out! 2022</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+    </body>
+</html>

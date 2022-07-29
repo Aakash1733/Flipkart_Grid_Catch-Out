@@ -1,0 +1,663 @@
+[
+    {
+      "name": "Backdoor: Reverse Shell",
+      "id": "BD000100",
+      "description": "Backdoor: Reverse Shell",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": "\b(eval|exec).{1,15}(decode|base64|decrypt|unencode)\b",
+          "type": "regex",
+          "scopes": [ "code", "comment" ],
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "Backdoor: Reverse Shell",
+      "id": "BD000101",
+      "description": "Backdoor: Reverse Shell",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": "(iex|invoke-expression) .*(webclient|openread|downloaddata|downloadfile|downloadstring)",
+          "type": "regex",
+          "scopes": [ "code" ],
+          "confidence": "high"
+        },
+        {
+          "pattern": "(webclient|openread|downloaddata|downloadfile|downloadstring).{1,50}start-process",
+          "type": "regex",
+          "scopes": [ "code" ],
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "Backdoor: Web Request in Setup",
+      "id": "BD000102",
+      "description": "Backdoor: Web Request in Setup",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": "requests.get",
+          "type": "string",
+          "scopes": [ "code" ],
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "Backdoor: Installation Script",
+      "id": "BD000103",
+      "description": "Backdoor: Installation Script",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": "(pre|post|)install\"\\s*:\\s*\"node [^\\s]+\\.js",
+          "type": "regex",
+          "scopes": [ "code" ],
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "Backdoor: Curl Bashing",
+      "id": "BD000104",
+      "description": "Backdoor: Curl Bashing",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": "(curl|wget).{1,50}\\|\\s*(sh|bash)",
+          "type": "regex",
+          "scopes": [ "code" ],
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "Backdoor: CFDUID",
+      "id": "BD000200",
+      "description": "Backdoor: CFDUID",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": "___cfduid",
+          "type": "string",
+          "scopes": [ "code", "comment" ],
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "Backdoor: ZAUTHSS",
+      "id": "BD000201",
+      "description": "Backdoor: ZAUTHSS",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": "ZAUTHSS",
+          "type": "string",
+          "scopes": [ "code", "comment" ],
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "Backdoor: gohack.xyz",
+      "id": "BD000202",
+      "description": "Backdoor: gohack.xyz",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": "gohack.xyz",
+          "type": "string",
+          "scopes": [ "code", "comment" ],
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "Backdoor: Crypto Currency",
+      "id": "BD000400",
+      "description": "Backdoor: Crypto Currency",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": "\b(p2pool|miner|nxt|zcash|tether|ether|btc|monero|markleroot|xmr|(bit|lite|name|peer|doge|grid|prim|vert|tit|pot)coin)\b",
+          "type": "string",
+          "scopes": [ "code", "comment" ],
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "Backdoor: Data Exfiltration",
+      "id": "BD000700",
+      "description": "Backdoor: Data Exfiltration",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": "\\.(request|post|get)\\(",
+          "type": "regex",
+          "scopes": [ "code", "comment" ],
+          "confidence": "low"
+        }
+      ]
+    },
+    {
+      "name": "Backdoor: Data Exfiltration (Tokens)",
+      "id": "BD000701",
+      "description": "Backdoor: Data Exfiltration (Tokens)",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": "(npm owner|password|htpasswd|auth_?token|secret_?key|private_?key|authorized_keys?|npmrc|\\.ssh|usersecrets?|api_?keys|nuget\\.config|\\.identityservice)",
+          "type": "regex",
+          "scopes": [ "code", "comment" ],
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "Backdoor: Data Exfiltration (Environment)",
+      "id": "BD000702",
+      "description": "Backdoor: Data Exfiltration (Environment)",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": "(env|environment).{1,50}(get|post|curl|nc|invoke-restmethod)",
+          "type": "regex",
+          "scopes": [ "code", "comment" ],
+          "confidence": "high"
+        },
+        {
+          "pattern": "(iex|invoke-expression)\\s+\\$env",
+          "type": "regex",
+          "scopes": [ "code", "comment" ],
+          "confidence": "high"
+        },
+        {
+          "pattern": "process.env",
+          "type": "string",
+          "scopes": [ "code" ],
+          "confidence": "low"
+        }
+      ]
+    },
+    {
+      "name": "Backdoor: Data Exfiltration (Username)",
+      "id": "BD000703",
+      "description": "Backdoor: Data Exfiltration (Username)",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": ".userInfo",
+          "type": "string",
+          "scopes": [ "code" ],
+          "confidence": "low"
+        },
+        {
+          "pattern": "whoami",
+          "type": "string",
+          "scopes": [ "code" ],
+          "confidence": "low"
+        }
+      ]
+    },
+    {
+      "name": "Backdoor: Data Exfiltration (Hostname)",
+      "id": "BD000704",
+      "description": "Backdoor: Data Exfiltration (Hostname)",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": ".hostname",
+          "type": "string",
+          "scopes": [ "code" ],
+          "confidence": "low"
+        },
+        {
+          "pattern": "hostname",
+          "type": "string",
+          "scopes": [ "code" ],
+          "confidence": "low"
+        }
+      ]
+    },
+    {
+      "name": "Backdoor: Data Exfiltration (DNS)",
+      "id": "BD000705",
+      "description": "Backdoor: Data Exfiltration (DNS)",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": "dns.lookup",
+          "type": "string",
+          "scopes": [ "code" ],
+          "confidence": "low"
+        },
+        {
+          "pattern": "dns.resolve",
+          "type": "string",
+          "scopes": [ "code" ],
+          "confidence": "low"
+        },
+        {
+          "pattern": "dns.setServers",
+          "type": "string",
+          "scopes": [ "code" ],
+          "confidence": "low"
+        },
+        {
+          "pattern": "nslookup",
+          "type": "string",
+          "scopes": [ "code" ],
+          "confidence": "low"
+        }
+      ]
+    },
+    {
+      "name": "Backdoor: Data Exfiltration (Home Directory)",
+      "id": "BD000706",
+      "description": "Backdoor: Data Exfiltration (Home Directory)",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": ".homedir",
+          "type": "string",
+          "scopes": [ "code" ],
+          "confidence": "low"
+        }
+      ]
+    },
+    {
+      "name": "Backdoor: Data Exfiltration (Platform)",
+      "id": "BD000707",
+      "description": "Backdoor: Data Exfiltration (Platform)",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": ".platform",
+          "type": "string",
+          "scopes": [ "code" ],
+          "confidence": "low"
+        }
+      ]
+    },
+    {
+      "name": "Backdoor: Data Exfiltration (OS Type)",
+      "id": "BD000708",
+      "description": "Backdoor: Data Exfiltration (OS Type)",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": "os.type",
+          "type": "string",
+          "scopes": [ "code" ],
+          "confidence": "low"
+        }
+      ]
+    },
+    {
+      "name": "Backdoor: Data Exfiltration (Network Interfaces)",
+      "id": "BD000709",
+      "description": "Backdoor: Data Exfiltration (Network Interfaces)",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": ".networkInterfaces",
+          "type": "string",
+          "scopes": [ "code" ],
+          "confidence": "low"
+        }
+      ]
+    },
+    {
+      "name": "Backdoor: Data Exfiltration (DNS Settings)",
+      "id": "BD000710",
+      "description": "Backdoor: Data Exfiltration (DNS Settings)",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": "dns.getServers",
+          "type": "string",
+          "scopes": [ "code" ],
+          "confidence": "low"
+        }
+      ]
+    },
+    {
+      "name": "Backdoor: Data Exfiltration (Whoami)",
+      "id": "BD000711",
+      "description": "Backdoor: Data Exfiltration (Whoami)",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": "curl\\s+.*whoami",
+          "type": "regex",
+          "scopes": [ "code" ],
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "Backdoor: Data Exfiltration (Dep Confusion Test)",
+      "id": "BD000712",
+      "description": "Backdoor: Data Exfiltration (Dep Confusion Test)",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": ".userInfo()",
+          "type": "substring",
+          "scopes": [ "code" ],
+          "confidence": "high"
+        }
+      ],
+      "conditions": [
+        {
+          "pattern": {
+            "pattern": "dns",
+            "type": "string",
+            "scopes": [ "code" ],
+            "confidence": "high"
+          },
+          "search_in": "finding-region(-30,30)"
+        },
+        {
+          "pattern": {
+            "pattern": "https",
+            "type": "string",
+            "scopes": [ "code" ],
+            "confidence": "high"
+          },
+          "search_in": "finding-region(-30,30)"
+        },
+        {
+          "pattern": {
+            "pattern": ".request",
+            "type": "string",
+            "scopes": [ "code" ],
+            "confidence": "high"
+          },
+          "search_in": "finding-region(-30,30)"
+        }
+      ]
+    },
+    {
+      "name": "Dependency Confusion: Attack Pattern (Dependency)",
+      "id": "BD001001",
+      "description": "Dependency Confusion: Attack Pattern (Dependency)",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": "daemonsec637",
+          "type": "string",
+          "scopes": [ "code", "comment" ],
+          "confidence": "high"
+        },
+        {
+          "pattern": "infosecgirl",
+          "type": "string",
+          "scopes": [ "code", "comment" ],
+          "confidence": "high"
+        },
+        {
+          "pattern": "bountyrecon/most-secure-package",
+          "type": "string",
+          "scopes": [ "code", "comment" ],
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "Dependency Confusion: Attack Pattern (Suspicious Hostname)",
+      "id": "BD001002",
+      "description": "Dependency Confusion: Attack Pattern (Suspicious Hostname)",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": ".{1,45}\\.(pipedream\\.net|ceye\\.io|burpcollaborator\\.net|interact\\.sh|requestbin\\.net|nmnfbb\\.com)",
+          "type": "regex",
+          "scopes": [ "code", "comment" ],
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "Backdoor: IOC (Common Commands)",
+      "id": "BD000900",
+      "description": "Backdoor: Reverse Shell",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": "(\\-bxor|cpassword|getnetworkcredential|securestringtobstr|shellexecute|processtartinfo|activexobject|regsvr32|mimikatz|new-scheduledtask|loadlibrary|ptrtostructure|getdelegateforfunctionpointer|unsafenativemethods|structuretoptr|virtualprotect)",
+          "type": "regexword",
+          "scopes": [ "code" ],
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "LOLBAS: Windows Indicator",
+      "id": "BD000600",
+      "description": "Backdoor: LOLBAS: Windows Indicator",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": "\\s(advpack\\.dll|appvlp|at|atbroker|bash|bginfo|bitsadmin|cdb|certutil|cl_invocation\\.ps1|cl_mutexverifiers\\.ps1|cmd|cmdkey|cmstp|comsvcs\\.dll|control|csc|cscript|csi|devtoolslauncher|dfsvc|diskshadow|dnscmd|dnx|dotnet|dxcap|esentutl|eventvwr|excel|expand|extexport|extrac32|findstr|forfiles|ftp|gfxdownloadwrapper|gpscript|hh|ie4uinit|ieadvpack\\.dll|ieaframe\\.dll|ic|infdefaultinstall|installutil|jsc|makecab|manage-bde\\.wsf|mavinject|mftrace|microsoft\\.workflow\\.compiler|mmc|msbuild|msconfig|msdeploy|msdt|mshta|mshtml\\.dll|msc|msxsl|netsh|odbcconf|pcalua|pcwrun|pcwutl\\.dll|pester\\.bat|powerpnt|presentationhost|pubprn\\.vbs|rcsi|reg|regasm|regedit|register-cimprovider|regsvcs|regsvr32|rpcping|rundll32|runonce|runscripthelper|sc|schtasks|scriptrunner|setupapi\\.dll|shdocvw\\.dll|shell32\\.dll|slmgr\\.vbs|sqldumper|sqlps|sqltoolsps|squirrel|syncappvpublishingserver|syncappvpublishingserver\\.vbs|syssetup\\.dll|te|tracker|tttracer|update|url\\.dll|verclsid|vsjitdebugger|wab|winrm\\.vbs|winword|wmic|wscript|wsl|wsreset|xwizard|zipfldr\\.dll)\\s",
+          "type": "regex",
+          "scopes": [ "code" ],
+          "confidence": "low"
+        }
+      ]
+    },
+    {
+      "name": "LOLBAS: Linux Indicator",
+      "id": "BD000610",
+      "description": "Backdoor: LOLBAS: Linux Indicator",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": "\\s(apt|apt\\-get|aria2c|arp|ash|awk|base64|bash|bpftrace|busybox|cat|chmod|chown|cp|cpan|cpulimit|crontab|csh|curl|cut|dash|dd|diff|dmesg|dmsetup|dnf|docker|dpkg|easy_install|ed|emacs|env|expand|expect|facter|find|finger|flock|fmt|ftp|gawk|gdb|gimp|git|grep|head|iftop|ionice|ip|irb|jjs|journalctl|jrunscript|ksh|ld\\.so|ldconfig|logsave|ltrace|lua|mail|mawk|mount|mtr|mv|mysql|nano|nawk|nc|nice|nl|nmap|node|od|openssl|perl|pg|php|pic|pico|pip|puppet|readelf|red|rlogin|rlwrap|rpm|rpmquery|rsync|ruby|run\\-mailcap|run\\-parts|rvim|scp|screen|script|sed|service|setarch|sftp|shuf|smbclient|socat|sort|sqlite3|ssh|start\\-stop\\-daemon|stdbuf|strace|systemctl|tail|tar|taskset|tclsh|tcpdump|tee|telnet|tftp|time|timeout|tmux|top|ul|unexpand|uniq|unshare|vi|vim|watch|wget|whois|wish|xargs|xxd|yum|zsh|zypper)\\s",
+          "type": "regex",
+          "scopes": [ "code" ],
+          "confidence": "low"
+        }
+      ]
+    },
+    {
+      "name": "Backdoor: Obfuscation",
+      "id": "BD000800",
+      "description": "Backdoor: Obfuscation",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": "base64|encodedcommand|obfuscate",
+          "type": "regexword",
+          "scopes": [ "code" ],
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "Backdoor: Executing Obfuscated Code",
+      "id": "BD000801",
+      "description": "Backdoor: Executing Obfuscated Code",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": "fromhex.+decode",
+          "type": "regexword",
+          "scopes": [ "code" ],
+          "confidence": "high"
+        },
+        {
+          "pattern": "\\.get\\(.*(fromhex|decode)",
+          "type": "regex",
+          "scopes": [ "code" ],
+          "confidence": "high"
+        },
+        {
+          "pattern": "65786563",
+          "type": "string",
+          "scopes": [ "code" ],
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "Backdoor: Obfuscated String via Single Characters",
+      "id": "BD000802",
+      "description": "Backdoor: Obfuscated String via Single Characters",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": "([\\\"\\'].[\\\"\\']\\+){6,}",
+          "type": "regex",
+          "scopes": [ "code" ],
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "Backdoor: Setting DNS Server",
+      "id": "BD000803",
+      "description": "Backdoor: Setting DNS Server",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": "dns.setServers",
+          "type": "string",
+          "scopes": [ "code" ],
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "Backdoor: Long Strings",
+      "id": "BD000804",
+      "description": "Backdoor: Long Strings",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": "[\"'][a-z0-9]{40,}[\"']",
+          "type": "regex",
+          "scopes": [ "code" ],
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "Backdoor: Long Binary Strings",
+      "id": "BD000805",
+      "description": "Backdoor: Long Binary Strings",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": "(\\\\x[a-f0-9][a-f0-9]){10,}",
+          "type": "regex",
+          "scopes": [ "code" ],
+          "confidence": "medium"
+        }
+      ]
+    },
+    {
+      "name": "Backdoor: Obfuscated Dangerous Commands (exec)",
+      "id": "BD000806",
+      "description": "Backdoor: Obfuscated Dangerous Command (exec)",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": "65786563",
+          "type": "string",
+          "scopes": [ "code" ],
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "Backdoor: Obfuscated Dangerous Commands (eval)",
+      "id": "BD000807",
+      "description": "Backdoor: Obfuscated Dangerous Command (eval)",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": "6576616C28",
+          "type": "string",
+          "scopes": [ "code" ],
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "Backdoor: Obfuscated Dangerous Commands (system)",
+      "id": "BD000808",
+      "description": "Backdoor: Obfuscated Dangerous Command (system)",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": "73797374656d",
+          "type": "string",
+          "scopes": [ "code" ],
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "Backdoor: Obfuscated Dangerous Commands (base64_decode)",
+      "id": "BD000809",
+      "description": "Backdoor: Obfuscated Dangerous Command (base64_decode)",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": "61736536345f6465636f646528677a696e666c61746528",
+          "type": "string",
+          "scopes": [ "code" ],
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "Backdoor: Pastebin",
+      "id": "BD000500",
+      "description": "Backdoor: Pastebin",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": "pastebin|zerobin|ghostbin|hastebin",
+          "type": "regexword",
+          "scopes": [ "code", "comment" ],
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "Backdoor: Reverse Shell",
+      "id": "BD000300",
+      "description": "Backdoor: Reverse Shell",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": "(shell\\.now\\.sh|tcp\\.ngrok\\.io|reverse shell|reverse-shell\\.sh)",
+          "type": "regexword",
+          "scopes": [ "code", "comment" ],
+          "confidence": "high"
+        }
+      ]
+    },
+    {
+      "name": "Backdoor: Reverse Shell",
+      "id": "BD000301",
+      "description": "Backdoor: Reverse Shell",
+      "severity": "critical",
+      "patterns": [
+        {
+          "pattern": "ncat.*-e /bin/(ba)?sh",
+          "type": "regex",
+          "scopes": [ "code", "comment" ],
+          "confidence": "high"
+        }
+      ]
+    }
+  ]
